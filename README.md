@@ -48,8 +48,10 @@ VCC（VRChat Creator Companion）経由で導入した場合、VRChat SDKおよ�
 
 ### VCC（推奨）
 
-1. [配布ページ](https://lil2943.github.io/ItiOpti/)を開き、「VCCに追加」をクリックします。
+1. **[VCCに追加](https://lil2943.github.io/ItiOpti/vcc.html)** をクリックします。VCCが起動し、リポジトリの追加画面が表示されます（ブラウザに確認が表示された場合は「開く」を選択してください）。
 2. VCCで対象のプロジェクトを開き、パッケージ一覧からItiOptimiserを追加します。
+
+[配布ページ](https://lil2943.github.io/ItiOpti/)からも同じように追加できます。
 
 「VCCに追加」が反応しない場合は、VCCの設定画面から以下のURLをリポジトリとして手動で登録してください。
 

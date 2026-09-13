@@ -32,9 +32,21 @@ if (-not (Test-Path -LiteralPath $website)) { throw "VPM website template is mis
 # listing build fails, GitHub Pages is never deployed, and "Add to VCC" cannot work.
 $websiteApp = Join-Path $repo "Website/app.js"
 if (-not (Test-Path -LiteralPath $websiteApp)) { throw "VPM website app.js is missing (the listing build requires it)" }
+# The README links "Add to VCC" to this page. GitHub strips vcc:// links from
+# Markdown, so the README must go through an https page that launches VCC.
+$websiteVcc = Join-Path $repo "Website/vcc.html"
+if (-not (Test-Path -LiteralPath $websiteVcc)) { throw "Website/vcc.html is missing (the README 'Add to VCC' link points to it)" }
 # VCC only understands vcc://vpm/addRepo. "add-repo" is silently ignored.
-$indexText = [System.IO.File]::ReadAllText($website, [System.Text.Encoding]::UTF8)
-if ($indexText -match "vcc://vpm/add-repo") { throw "Website/index.html uses vcc://vpm/add-repo; VCC requires vcc://vpm/addRepo" }
+Get-ChildItem -LiteralPath (Join-Path $repo "Website") -File | Where-Object { $_.Extension -in ".html", ".js" } | ForEach-Object {
+    $text = [System.IO.File]::ReadAllText($_.FullName, [System.Text.Encoding]::UTF8)
+    if ($text -match "vcc://vpm/add-repo") { throw "Website/$($_.Name) uses vcc://vpm/add-repo; VCC requires vcc://vpm/addRepo" }
+    # Static pages must hard-code the listing URL. app.js is a Scriban template
+    # that fills the URL in at build time, so it is not checked here.
+    if ($_.Extension -eq ".html" -and $text -match "vcc://vpm/addRepo" -and
+        $text -notmatch "lil2943\.github\.io(/|%2F)ItiOpti(/|%2F)index\.json") {
+        throw "Website/$($_.Name) has a VCC link that does not point to the ItiOpti listing"
+    }
+}
 
 $license = Get-ChildItem -LiteralPath $package -File | Where-Object {
     $_.Name -match '^LICENSE(\..+)?$'

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ItiOptimiser を VCC に追加</title>
+  <link rel="stylesheet" href="styles.css">
+  <!--
+    README から「VCCに追加」を押したときの中継ページ。
+
+    GitHub の README（Markdown）は vcc:// で始まるリンクを表示時に消してしまう
+    （GitHub の Markdown 変換で確認済み: リンクが外れて文字だけになる）。
+    そこで README からは https のこのページへリンクし、ここで VCC を呼び出す。
+
+    このファイルは配布ページ生成ツール（Scriban）では処理されず、そのまま公開される。
+    そのため URL は直接書いている。source.json の url と一致させること。
+  -->
+</head>
+<body>
+  <main>
+    <h1>VCC に追加</h1>
+    <p>VCC（VRChat Creator Companion）を開いています…</p>
+    <p>ブラウザに「VRChat Creator Companion を開きますか？」などの確認が表示された場合は、開くを選んでください。</p>
+
+    <p>
+      <a id="vccAddRepoButton" class="primary"
+         href="vcc://vpm/addRepo?url=https%3A%2F%2Flil2943.github.io%2FItiOpti%2Findex.json">VCCに追加</a>
+    </p>
+
+    <p>VCC が開かない場合は、VCC の設定画面（Settings → Packages → Add Repository）で次の URL を追加してください。</p>
+    <div class="url-row">
+      <code id="vccUrlField">https://lil2943.github.io/ItiOpti/index.json</code>
+      <button id="vccUrlFieldCopy" type="button">コピー</button>
+    </div>
+
+    <p>VCC がまだインストールされていない場合は、先に <a href="https://vrchat.com/home/download">VRChat 公式サイト</a> から導入してください。</p>
+
+    <p><a href="./">配布ページへ</a> ／ <a href="https://github.com/lil2943/ItiOpti">使い方（GitHub）</a></p>
+  </main>
+  <script>
+    (function () {
+      var LISTING_URL = "https://lil2943.github.io/ItiOpti/index.json";
+      var link = "vcc://vpm/addRepo?url=" + encodeURIComponent(LISTING_URL);
+
+      var button = document.getElementById("vccAddRepoButton");
+      if (button) button.href = link;
+
+      // ページを開いた瞬間に VCC を呼び出す。
+      // ブラウザが外部アプリの起動を止めた場合でも、上のボタンから押し直せる。
+      window.location.href = link;
+
+      var copy = document.getElementById("vccUrlFieldCopy");
+      if (copy) {
+        copy.addEventListener("click", function () {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(LISTING_URL).then(function () {
+              copy.textContent = "コピーしました";
+              setTimeout(function () { copy.textContent = "コピー"; }, 2000);
+            }, function () {});
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
