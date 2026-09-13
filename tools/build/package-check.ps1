@@ -28,6 +28,13 @@ $website = Join-Path $repo "Website/index.html"
 if (-not (Test-Path -LiteralPath $releaseWorkflow)) { throw "Release workflow is missing" }
 if (-not (Test-Path -LiteralPath $listingWorkflow)) { throw "VPM listing workflow is missing" }
 if (-not (Test-Path -LiteralPath $website)) { throw "VPM website template is missing" }
+# vrchat-community/package-list-action always reads Website/app.js. Without it the
+# listing build fails, GitHub Pages is never deployed, and "Add to VCC" cannot work.
+$websiteApp = Join-Path $repo "Website/app.js"
+if (-not (Test-Path -LiteralPath $websiteApp)) { throw "VPM website app.js is missing (the listing build requires it)" }
+# VCC only understands vcc://vpm/addRepo. "add-repo" is silently ignored.
+$indexText = [System.IO.File]::ReadAllText($website, [System.Text.Encoding]::UTF8)
+if ($indexText -match "vcc://vpm/add-repo") { throw "Website/index.html uses vcc://vpm/add-repo; VCC requires vcc://vpm/addRepo" }
 
 $license = Get-ChildItem -LiteralPath $package -File | Where-Object {
     $_.Name -match '^LICENSE(\..+)?$'

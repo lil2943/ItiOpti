@@ -1,0 +1,17 @@
+{
+  "name": "ItiOptimiser",
+  "id": "dev.hisokakaori.hkopti.listing",
+  "author": {
+    "name": "lil2943",
+    "url": "https://github.com/lil2943"
+  },
+  "url": "https://lil2943.github.io/ItiOpti/index.json",
+  "description": "VRChat アバターのダウンロードサイズとテクスチャ容量を減らす Unity エディタ拡張です。",
+  "infoLink": {
+    "text": "使い方（GitHub）",
+    "url": "https://github.com/lil2943/ItiOpti"
+  },
+  "githubRepos": [
+    "lil2943/ItiOpti"
+  ]
+}

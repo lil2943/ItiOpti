@@ -6,3 +6,7 @@ a { color: #8ecbff; }
 .primary { display: inline-block; padding: 12px 22px; border-radius: 8px; background: #1976d2; color: white; text-decoration: none; font-weight: 700; }
 code, article { display: block; padding: 16px; border-radius: 8px; background: #24282d; overflow-wrap: anywhere; }
 section { margin-top: 48px; }
+.url-row { display: flex; gap: 8px; align-items: stretch; }
+.url-row code { flex: 1; margin: 0; }
+.url-row button { padding: 0 16px; border: 0; border-radius: 8px; background: #3a4048; color: #eef1f4; font-weight: 700; cursor: pointer; }
+.url-row button:hover { background: #4a515b; }
