@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Removed `.meta` files left behind by empty placeholder folders (`Editor/NDMF`, `Editor/Profiles`, `Runtime/Components`). Git does not keep empty folders, so these `.meta` files had no matching folder in the distributed package and caused Unity warnings.
+
 ## 0.1.0
 
 - Added avatar analysis and import-setting recommendations.

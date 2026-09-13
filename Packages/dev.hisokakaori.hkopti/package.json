@@ -1,7 +1,7 @@
 {
   "name": "dev.hisokakaori.hkopti",
   "displayName": "ItiOptimiser",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "unity": "2022.3",
   "description": "VRChatアバター向けの衣装統合・軽量化ツール。不要なボーン、重複したPhysBone、冗長なマテリアルやテクスチャを削減します。",
   "author": {
