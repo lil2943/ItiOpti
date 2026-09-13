@@ -52,6 +52,34 @@ if ($missingMeta.Count -gt 0) {
     throw "Missing .meta files:`n$($missingMeta -join "`n")"
 }
 
+# A .meta whose asset is gone. Unity warns about these, and the release
+# workflow builds the unitypackage from the .meta list, so it can fail on them.
+$orphanMeta = New-Object System.Collections.Generic.List[string]
+Get-ChildItem -LiteralPath $package -Recurse -Force -Filter "*.meta" | ForEach-Object {
+    $assetPath = $_.FullName.Substring(0, $_.FullName.Length - 5)
+    if (-not (Test-Path -LiteralPath $assetPath)) {
+        $orphanMeta.Add($_.FullName.Substring($package.Length + 1))
+    }
+}
+if ($orphanMeta.Count -gt 0) {
+    throw "Orphan .meta files (asset is missing):`n$($orphanMeta -join "`n")"
+}
+
+# A folder with no files under it. Git cannot store empty folders, so after a
+# clone the folder disappears and its .meta becomes an orphan. This only shows
+# up on a fresh checkout (CI, the public repository), never on this machine.
+$emptyDirs = New-Object System.Collections.Generic.List[string]
+Get-ChildItem -LiteralPath $package -Recurse -Force -Directory | ForEach-Object {
+    $files = Get-ChildItem -LiteralPath $_.FullName -Recurse -Force -File |
+        Where-Object { $_.Name -notlike "*.meta" }
+    if ($null -eq $files -or @($files).Count -eq 0) {
+        $emptyDirs.Add($_.FullName.Substring($package.Length + 1))
+    }
+}
+if ($emptyDirs.Count -gt 0) {
+    throw "Folders with no files (they vanish in git and leave orphan .meta):`n$($emptyDirs -join "`n")"
+}
+
 $guidOwners = @{}
 $duplicates = New-Object System.Collections.Generic.List[string]
 Get-ChildItem -LiteralPath $package -Recurse -Filter "*.meta" | ForEach-Object {
