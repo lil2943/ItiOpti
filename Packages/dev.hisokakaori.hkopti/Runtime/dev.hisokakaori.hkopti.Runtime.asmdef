@@ -1,0 +1,18 @@
+{
+  "name": "dev.hisokakaori.hkopti.Runtime",
+  "rootNamespace": "HisokaKaori.HKOpti",
+  "references": [
+    "VRC.SDKBase",
+    "VRC.SDK3A",
+    "nadena.dev.ndmf.runtime"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

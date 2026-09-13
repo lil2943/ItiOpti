@@ -1,0 +1,23 @@
+{
+  "name": "dev.hisokakaori.hkopti.Editor",
+  "rootNamespace": "HisokaKaori.HKOpti.Editor",
+  "references": [
+    "dev.hisokakaori.hkopti.Runtime",
+    "VRC.SDKBase",
+    "VRC.SDKBase.Editor",
+    "VRC.SDK3A",
+    "VRC.SDK3A.Editor",
+    "nadena.dev.ndmf",
+    "nadena.dev.ndmf.runtime",
+    "nadena.dev.ndmf.vrchat"
+  ],
+  "includePlatforms": [ "Editor" ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

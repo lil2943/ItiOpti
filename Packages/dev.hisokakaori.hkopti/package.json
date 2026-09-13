@@ -1,0 +1,21 @@
+{
+  "name": "dev.hisokakaori.hkopti",
+  "displayName": "ItiOptimiser",
+  "version": "0.1.0",
+  "unity": "2022.3",
+  "description": "VRChatアバター向けの衣装統合・軽量化ツール。不要なボーン、重複したPhysBone、冗長なマテリアルやテクスチャを削減します。",
+  "author": {
+    "name": "lil2943",
+    "url": "https://github.com/lil2943"
+  },
+  "url": "https://github.com/lil2943/ItiOpti",
+  "documentationUrl": "https://github.com/lil2943/ItiOpti#readme",
+  "changelogUrl": "https://github.com/lil2943/ItiOpti/blob/main/Packages/dev.hisokakaori.hkopti/CHANGELOG.md",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/lil2943/ItiOpti/blob/main/LICENSE",
+  "vpmDependencies": {
+    "com.vrchat.avatars": ">=3.10.0 <4.0.0-a",
+    "nadena.dev.ndmf": ">=1.14.3 <2.0.0-a"
+  },
+  "hideInEditor": false
+}

@@ -1,0 +1,54 @@
+name: Build VPM Listing
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Build Release]
+    types: [completed]
+  release:
+    types: [published, created, edited, unpublished, deleted, released]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-listing:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Checkout official VPM listing builder
+        uses: actions/checkout@v4
+        with:
+          repository: vrchat-community/package-list-action
+          path: ci
+          clean: false
+      - name: Restore builder cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ci/.nuke/temp
+            ~/.nuget/packages
+          key: ${{ runner.os }}-${{ hashFiles('ci/**/global.json', 'ci/**/*.csproj') }}
+      - name: Build listing
+        run: ci/build.cmd BuildRepoListing --root ci --list-publish-directory "$GITHUB_WORKSPACE/Website" --current-package-name dev.hisokakaori.hkopti
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: Website
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

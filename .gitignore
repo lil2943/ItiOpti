@@ -1,0 +1,9 @@
+Library/
+Temp/
+obj/
+*.csproj
+*.sln
+.vs/
+.idea/
+Thumbs.db
+.DS_Store

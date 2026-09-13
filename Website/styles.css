@@ -1,0 +1,8 @@
+:root { color-scheme: dark; font-family: system-ui, sans-serif; }
+body { margin: 0; background: #17191c; color: #eef1f4; }
+main { width: min(760px, calc(100% - 32px)); margin: 64px auto; }
+h1 { font-size: clamp(2rem, 7vw, 4rem); margin-bottom: .25em; }
+a { color: #8ecbff; }
+.primary { display: inline-block; padding: 12px 22px; border-radius: 8px; background: #1976d2; color: white; text-decoration: none; font-weight: 700; }
+code, article { display: block; padding: 16px; border-radius: 8px; background: #24282d; overflow-wrap: anywhere; }
+section { margin-top: 48px; }

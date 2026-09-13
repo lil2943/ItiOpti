@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ItiOptimiser</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1>{{ listingInfo.Name }}</h1>
+    <p>{{ listingInfo.Description }}</p>
+    <p><a class="primary" href="vcc://vpm/add-repo?url=https%3A%2F%2Flil2943.github.io%2FItiOpti%2Findex.json">VCCに追加</a></p>
+    <p>反応しない場合は、VCCの設定画面で次のURLをリポジトリとして追加してください。</p>
+    <code>https://lil2943.github.io/ItiOpti/index.json</code>
+    <p><a href="https://github.com/lil2943/ItiOpti">GitHubとダウンロード</a></p>
+    <section>
+      <h2>利用可能なパッケージ</h2>
+      {{~ for package in packages ~}}
+      <article>
+        <h3>{{ package.DisplayName }} {{ package.Version }}</h3>
+        <p>{{ package.Description }}</p>
+        <p><a href="{{ package.ZipUrl }}">VPM用ZIPをダウンロード</a></p>
+      </article>
+      {{~ end ~}}
+    </section>
+  </main>
+</body>
+</html>
